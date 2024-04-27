@@ -51,6 +51,28 @@ app.get("/userdb", (req, res) => {
     return res.json(data)
   })
 })
+// menampilkan item
+app.get("/items", (req, res) => {
+  const sql = "SELECT * FROM items"
+  db.query(sql, (err, data) => {
+    if (err) return res.json(err)
+    return res.json(data)
+  })
+})
+// create
+app.post("/items", (req, res) => {
+  const { gambar, kode_barang, nama, kategori, stok, harga } = req.body
+  const sql = "INSERT INTO items (gambar, kode_barang, nama, kategori, stok, harga) VALUES (?, ?, ?, ?, ?, ?)"
+  const values = [gambar, kode_barang, nama, kategori, stok, harga]
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Error inserting item:", err)
+      return res.json({ success: false, error: err.message })
+    }
+    console.log("Item added successfully")
+    return res.json({ success: true })
+  })
+})
 
 app.listen(8081, () => {
   console.log("Listening on")
