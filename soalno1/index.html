@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>True False Checker</title>
+  </head>
+  <body>
+    <h2>TRUE FALSE Checker</h2>
+    <input type="text" id="inputString" placeholder="Masukkan string" />
+    <button onclick="checkPalindrom()">Check</button>
+    <p id="result"></p>
+
+    <script>
+      function isPalindrom(str) {
+        // Menghapus spasi dan mengubah semua karakter menjadi huruf kecil
+        str = str.replace(/\s/g, "").toLowerCase()
+        // Mengecek apakah string adalah palindrom
+        for (let i = 0; i < Math.floor(str.length / 2); i++) {
+          if (str[i] !== str[str.length - 1 - i]) {
+            return false
+          }
+        }
+        return true
+      }
+
+      function checkPalindrom() {
+        const inputString = document.getElementById("inputString").value
+        const resultElement = document.getElementById("result")
+        // Memeriksa apakah string adalah palindrom atau tidak
+        const isPalindromResult = isPalindrom(inputString)
+        // Menampilkan hasil
+        if (isPalindromResult) {
+          resultElement.textContent = "TRUE"
+        } else {
+          resultElement.textContent = "FALSE"
+        }
+      }
+    </script>
+  </body>
+</html>
